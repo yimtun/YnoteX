@@ -1040,7 +1040,7 @@ nodeSecret:
   userKey: "AQBbU/9oKYbBDBAA6P9isEXWP7V/O2SH77IpmQ=="
 
 
-# 禁用加密
+
 encryption:
   enabled: false
 [root@10-211-55-32 ~]# 
