@@ -1,4 +1,4 @@
-# Get your onw Ceph env
+# Get your own Ceph env
 
 
 
