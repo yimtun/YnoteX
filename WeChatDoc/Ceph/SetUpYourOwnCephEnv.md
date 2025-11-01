@@ -1,39 +1,26 @@
 # Set Up Your Own Ceph Env
 
-
-
 Hi everyone, my name is Michael, and I'm a developer. I'm currently practicing my English writing.
 
+In the past, software was all-in-one, combining both hardware and software components. As a developer, you had to install and prepare the system, set up hardware drivers, configure network devices or routing rules directly on the system, build your own web server, set up SSL certificates, and so on.
 
-
-
-In the past, software was all-in-one, including both physical and software parts. As a developer, you had to install and prepare the system, hardware drivers, configure hardware network devices or set route rules directly on the system, build your own web server, configure SSL certificates, and so on.
-
-
-But later, like other industries, the software field also had specialization and pipeline like Ford."We started building distributed systems – a big system running across many physical machines, VMs, or bare containers.
-So, we got different roles: infra engineer, DB engineer, network engineer, system engineer, backend engineer, frontend engineer. You only needed to write your business code. You didn't need to care about other things. If there was trouble, you could just search the monitoring / APM system, and look at system load, JVM usage, and logs.
-
-
+But later, like other industries, the software field also developed specialization and assembly-line workflows, just like Ford. We started building distributed systems – large systems running across many physical machines, VMs, or bare-metal containers.  
+So, we got different roles: infra engineer, DB engineer, network engineer, system engineer, backend engineer, frontend engineer. You only needed to write your business code. You didn't need to care about other things. If there was trouble, you could just check the monitoring/APM system and look at system load, JVM usage, and logs.
 
 Then, Kubernetes came. Logically, it's a distributed system, but physically, it's back to all-in-one. A K8s node takes on more tasks – networking, storage, and more.
 
-
-This is a trend – things are coming back. With K8s, many functions have returned to the system level. As a developer, you have to know everything again. Especially as an Infra Developer, it's about virtualization technologies: KVM, libvirt, OpenStack, Kubernetes.
-
+This is a trend – things are coming full circle. With K8s, many functions have returned to the system level. As a developer, you have to know everything again. Especially as an Infra Developer, it's about virtualization technologies: KVM, libvirt, OpenStack, Kubernetes.
 
 If you just use public cloud for VMs, you don't need to know how to use a block device. But now, for a pod, you have to know how it works. Networking is also more complicated – not just static routes, but many kernel-supported network functions.
 
-
 So, I think I can pull some English docs together. This can improve my English writing and maybe be useful to you too.
 
-
-This time, this doc will show you how to set up a basic Ceph environment without needing many disk devices.If there are some errors in the tech or my English, I'd really appreciate your feedback.
-
-
-
+This time, this doc will show you how to set up a basic Ceph environment without needing many disk devices. If there are some errors in the tech or my English, I'd really appreciate your feedback.
 
 A quick note on my approach: My documentation isn't heavily focused on theory. One reason is that I want to keep my English writing fairly conversational. The other, more important reason, is that I prefer to get things working first. Once you have a running environment, you can then explore the concepts and theory behind it on your own.
 
+I’ll update this doc whenever I make changes.  
+You can always find the latest version on [GitHub](https://github.com/yimtun/YnoteX/blob/main/WeChatDoc/Ceph/SetUpYourOwnCephEnv.md).
 
 OK, let's go!
 
@@ -1518,7 +1505,7 @@ quay.io/ceph/ceph@sha256:1b9158ce28975f95def6a0ad459fa19f1336506074267a4b47c1bd9
 
 
 
-# remove some cmd for file /etc/rc.d/rc.local  
+# remove some losetup and lvchange commond  for file /etc/rc.d/rc.local  
 
 [root@10-211-55-34 ~]# cat  /etc/rc.d/rc.local 
 #!/bin/bash
