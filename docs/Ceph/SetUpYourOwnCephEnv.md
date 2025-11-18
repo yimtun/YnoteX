@@ -1513,3 +1513,35 @@ touch /var/lock/subsys/local
 
 [root@10-211-55-34 ~]# 
 ```
+
+## 11 debug usefull
+
+use pvc find rbd in Ceph 
+
+```shell
+[root@10-211-55-32 ~]# kubectl get pv $(kubectl get pvc pvc1 -o jsonpath='{.spec.volumeName}') -o json | jq -r '.spec.csi.volumeHandle | split("-") | .[-5:] | join("-")'
+9c0a1be5-3528-4c90-b6cc-109a8defe4d5
+[root@10-211-55-32 ~]# 
+```
+
+```shell
+[root@10-211-55-34 ceph]# cephadm shell --  rbd -p rbd info csi-vol-9c0a1be5-3528-4c90-b6cc-109a8defe4d5
+Inferring fsid a9ae839a-b325-11f0-9192-001c4277e7e6
+Inferring config /var/lib/ceph/a9ae839a-b325-11f0-9192-001c4277e7e6/mon.10-211-55-34/config
+Using ceph image with id '0f5473a1e726' and tag 'v18' created on 2025-05-08 01:48:39 +0800 CST
+quay.io/ceph/ceph@sha256:1b9158ce28975f95def6a0ad459fa19f1336506074267a4b47c1bd914a00fec0
+rbd image 'csi-vol-9c0a1be5-3528-4c90-b6cc-109a8defe4d5':
+        size 1 GiB in 256 objects
+        order 22 (4 MiB objects)
+        snapshot_count: 0
+        id: 37c8ca41b43a
+        block_name_prefix: rbd_data.37c8ca41b43a
+        format: 2
+        features: layering, exclusive-lock, object-map, fast-diff, deep-flatten
+        op_features: 
+        flags: 
+        create_timestamp: Mon Oct 27 11:32:45 2025
+        access_timestamp: Mon Oct 27 11:32:45 2025
+        modify_timestamp: Mon Oct 27 11:32:45 2025
+[root@10-211-55-34 ceph]# 
+```
